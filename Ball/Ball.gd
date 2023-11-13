@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var speed = 50
+var speed = 500
 var velocity= Vector2.ZERO
 func _ready():
 	velocity.x = [-1,1][randi() % 2]
