@@ -1,0 +1,106 @@
+[gd_scene load_steps=8 format=3 uid="uid://4if7xurigbck"]
+
+[ext_resource type="Script" path="res://Main/Main.gd" id="1_1ywbi"]
+[ext_resource type="PackedScene" uid="uid://bqlbuiwnjtiwa" path="res://Player/Player.tscn" id="2_qivfm"]
+[ext_resource type="PackedScene" uid="uid://bitiskll3n4vi" path="res://Opponent/Opponent.tscn" id="3_ek3vv"]
+[ext_resource type="PackedScene" uid="uid://k5t2kva52ky8" path="res://Ball/Ball.tscn" id="4_52hsi"]
+[ext_resource type="PackedScene" uid="uid://cfefyied7mu68" path="res://PauseMenu/PauseMenu.tscn" id="5_pm8j7"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(1010, 10)
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(16, 1080)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_1ywbi")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 1)
+
+[node name="OpponentScore" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.888
+anchor_top = 0.074
+anchor_right = 0.964
+anchor_bottom = 0.213
+offset_left = -4.95996
+offset_top = 0.0800018
+offset_right = -100.88
+offset_bottom = -100.04
+scale = Vector2(3, 3)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "00"
+
+[node name="PlayerScore" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.0416667
+anchor_top = 0.0740741
+anchor_right = 0.119792
+anchor_bottom = 0.212963
+offset_right = -100.0
+offset_bottom = -100.0
+scale = Vector2(3, 3)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "00"
+
+[node name="Player" parent="." instance=ExtResource("2_qivfm")]
+position = Vector2(50, 540)
+scale = Vector2(3, 3)
+
+[node name="WallTop" type="StaticBody2D" parent="."]
+position = Vector2(960, 0)
+scale = Vector2(1.9, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop"]
+shape = SubResource("1")
+
+[node name="WallBottom" type="StaticBody2D" parent="."]
+position = Vector2(960, 1080)
+scale = Vector2(1.9, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom"]
+shape = SubResource("1")
+
+[node name="Opponent" parent="." instance=ExtResource("3_ek3vv")]
+position = Vector2(1870, 540)
+scale = Vector2(3, 3)
+
+[node name="Ball" parent="." instance=ExtResource("4_52hsi")]
+position = Vector2(960, 540)
+
+[node name="Left" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
+position = Vector2(-8, 540)
+shape = SubResource("2")
+
+[node name="Right" type="Area2D" parent="."]
+position = Vector2(1058, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
+position = Vector2(870, 540)
+shape = SubResource("2")
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_pm8j7")]
+visible = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -89.9999
+offset_right = -49.9999
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+alignment = 1
+
+[node name="Pause" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "| |"
+
+[connection signal="body_entered" from="Left" to="." method="_on_Left_body_entered"]
+[connection signal="body_entered" from="Right" to="." method="_on_Right_body_entered"]

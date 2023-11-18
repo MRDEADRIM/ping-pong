@@ -1,13 +1,14 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-var speed = 0
+var speed = 350
 var ball
-
+var player
 func _ready():
-	ball = get_parent().find_node("Ball")
+	ball = get_parent().find_child("Ball")
 
 func _physics_process(delta):
-	move_and_slide(Vector2(0,get_opponent_direction())*speed)
+	set_velocity(Vector2(0,get_opponent_direction())*speed)
+	move_and_slide()
 	#var velocity = Vector2.ZERO
 	#if Input.is_action_just_pressed("ui_up"):
 	#	velocity.y -= 1
@@ -30,9 +31,12 @@ func get_opponent_direction():
 
 
 
-func _on_Area2D_body_exited(body):
+
+
+
+
+func _on_area_2d_area_entered(area):
 	speed=0
-
-
-func _on_Area2D_body_entered(body):
-	speed=350
+	player=get_parent().find_child("Opponent")
+	player.speed=350
+	print(area.name," PLAYER ENTER")
