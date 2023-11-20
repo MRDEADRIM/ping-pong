@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = 350
+var speed = 360
 var ball
 var player
 func _ready():
@@ -38,5 +38,5 @@ func get_opponent_direction():
 func _on_area_2d_area_entered(area):
 	speed=0
 	player=get_parent().find_child("Opponent")
-	player.speed=350
+	player.speed=360
 	print(area.name," PLAYER ENTER")
