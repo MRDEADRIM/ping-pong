@@ -71,6 +71,7 @@ scale = Vector2(3, 3)
 
 [node name="Ball" parent="." instance=ExtResource("4_52hsi")]
 position = Vector2(960, 540)
+platform_floor_layers = 4294967294
 
 [node name="Left" type="Area2D" parent="."]
 
