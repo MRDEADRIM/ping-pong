@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://4if7xurigbck"]
+[gd_scene load_steps=9 format=3 uid="uid://4if7xurigbck"]
 
 [ext_resource type="Script" path="res://Main/Main.gd" id="1_1ywbi"]
 [ext_resource type="PackedScene" uid="uid://bqlbuiwnjtiwa" path="res://Player/Player.tscn" id="2_qivfm"]
@@ -7,10 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://cfefyied7mu68" path="res://PauseMenu/PauseMenu.tscn" id="5_pm8j7"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(1010, 10)
+size = Vector2(1920, 2)
 
-[sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(16, 1080)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_byyny"]
+size = Vector2(2, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g872r"]
+size = Vector2(2, 1080)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_1ywbi")
@@ -19,6 +22,8 @@ script = ExtResource("1_1ywbi")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="OpponentScore" type="Label" parent="."]
@@ -34,6 +39,8 @@ offset_bottom = -100.04
 scale = Vector2(3, 3)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PlayerScore" type="Label" parent="."]
 anchors_preset = -1
@@ -46,6 +53,8 @@ offset_bottom = -100.0
 scale = Vector2(3, 3)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Player" parent="." instance=ExtResource("2_qivfm")]
 position = Vector2(50, 540)
@@ -53,15 +62,13 @@ scale = Vector2(3, 3)
 platform_floor_layers = 4294967294
 
 [node name="WallTop" type="StaticBody2D" parent="."]
-position = Vector2(960, 0)
-scale = Vector2(1.9, 1)
+position = Vector2(960, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop"]
 shape = SubResource("1")
 
 [node name="WallBottom" type="StaticBody2D" parent="."]
-position = Vector2(960, 1080)
-scale = Vector2(1.9, 1)
+position = Vector2(960, 1081)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom"]
 shape = SubResource("1")
@@ -75,17 +82,16 @@ platform_floor_layers = 4294967294
 position = Vector2(960, 540)
 
 [node name="Left" type="Area2D" parent="."]
+position = Vector2(-1, 540)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
-position = Vector2(-8, 540)
-shape = SubResource("2")
+shape = SubResource("RectangleShape2D_byyny")
 
 [node name="Right" type="Area2D" parent="."]
-position = Vector2(1058, 0)
+position = Vector2(1921, 540)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
-position = Vector2(870, 540)
-shape = SubResource("2")
+shape = SubResource("RectangleShape2D_g872r")
 
 [node name="PauseMenu" parent="." instance=ExtResource("5_pm8j7")]
 visible = false
